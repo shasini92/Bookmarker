@@ -98,6 +98,9 @@ function fetchBookmarks() {
 }
 // Validate Form
 function validateForm(siteName, siteUrl) {
+  //   Get bookmarks from local storage
+  var bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+
   if (!siteName || !siteUrl) {
     alert("Please fill in the form");
     return false;
@@ -112,5 +115,12 @@ function validateForm(siteName, siteUrl) {
     return false;
   }
 
+  // check if the bookmark already exists
+  for (var i = 0; i < bookmarks.length; i++) {
+    if (bookmarks[i].name == siteName) {
+      alert("Bookmark already exists");
+      return false;
+    }
+  }
   return true;
 }
